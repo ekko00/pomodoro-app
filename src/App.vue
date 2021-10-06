@@ -9,25 +9,28 @@
   </div>
 
   <p>{{ state }}</p>
+  <timer></timer>
   <p>{{ timer }}</p>
 </template>
 
 <script>
 import buttonTimer from "./components/Button.vue";
 import myImage from "./components/Image.vue";
+import timer from "./components/Timer.vue";
 
 export default {
   name: "App",
   components: {
     buttonTimer,
-    myImage
+    myImage,
+    timer
   },
   data() {
     return {
       title: "Pomodoro : Ben & Jerry",
       state: "WORK !",
       timer: "0.0",
-      image: "@/assets/tomate.png",
+      image: "./assets/tomate.png",
       listButtons: [
         {
           id: "buttonPlay",
