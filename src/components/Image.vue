@@ -1,7 +1,7 @@
-<template>
-  <div>
+<template lang="html">
+  <section class="image">
       <img :src="image">
-  </div>
+  </section>
 </template>
 
 <script>

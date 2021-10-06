@@ -9,23 +9,27 @@
   </div>
   
   <timer ref="timerRef" v-on:swapState="changeTitle"></timer>
+  
+  <restPlace></restPlace>
 </template>
 
 <script>
 import buttonTimer from "./components/Button.vue";
 import myImage from "./components/Image.vue";
 import timer from "./components/Timer.vue";
+import restPlace from "./components/RestPlace.vue";
 
 export default {
   name: "App",
   components: {
     buttonTimer,
     myImage,
-    timer
+    timer,
+    restPlace
   },
   data() {
     return {
-      title: "Pomodoro : Ben & Jerry",
+      title: "Pomodoro : Luka & Thibaud",
       state: "WORK !",
       image: require("./assets/tomate2.jpg"),
       listButtons: [
