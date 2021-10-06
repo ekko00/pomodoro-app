@@ -1,6 +1,7 @@
 <template lang="html">
 
   <section class="timer">
+    <h1>{{ state=="work"?"WORK !":"REST !" }}</h1>
     <h1>{{ minutes.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false }) }}:{{ seconds.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false }) }}</h1>
   </section>
 
@@ -76,14 +77,14 @@
       swapState() {
         if (this.state == "work") {
           this.time = REST_TIME_DEFAULT;
-          this.state == "rest";          
+          this.state = "rest";
         }
         else {
           this.time = WORK_TIME_DEFAULT;
           this.state = "work";
         }
+        this.$emit("swapState", this.state);
       }
-
     },
     computed: {
 

@@ -7,9 +7,8 @@
     <buttonTimer v-on:onClick="Pause" :buttonValue="listButtons[1]"></buttonTimer>
     <buttonTimer v-on:onClick="Stop" :buttonValue="listButtons[2]"></buttonTimer>
   </div>
-
-  <p>{{ state }}</p>
-  <timer ref="timerRef"></timer>
+  
+  <timer ref="timerRef" v-on:swapState="changeTitle"></timer>
 </template>
 
 <script>
@@ -67,13 +66,9 @@ export default {
       this.listButtons[2].isDisable = true;
       this.$refs.timerRef.stopTimer();
     },
-    SwitchState(state) {
-      if (state == "WORK !") {
-        state = "REST !";
-      } else {
-        state = "WORK !";
-      }
-    },
+    UpdateView(stateNew){
+      this.state = stateNew;
+    }
   },
 };
 </script>
