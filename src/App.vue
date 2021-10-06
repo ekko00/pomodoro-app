@@ -30,7 +30,7 @@ export default {
       title: "Pomodoro : Ben & Jerry",
       state: "WORK !",
       timer: "0.0",
-      image: "./assets/tomate.png",
+      image: require("./assets/tomate2.jpg"),
       listButtons: [
         {
           id: "buttonPlay",
