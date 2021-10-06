@@ -1,13 +1,14 @@
 <template lang="html">
 
   <section class="rest-place">
-    <h1>Cats !</h1>
+    <img :src="catImage">
   </section>
 
 </template>
 
 <script lang="js">
   import axios from 'axios'
+  import stopImage from "../assets/stop.png"
 
   export default  {
     name: 'rest-place',
@@ -17,11 +18,11 @@
     },
     data () {
       return {
-        image: { url: ""}
+        catImage: String
       }
     },
-    created() {
-      this.loadNextImage();
+    created(){
+      this.hiddingCat();
     },
     methods: {
       async loadRandomCat() {
@@ -30,17 +31,17 @@
 
           let response = await axios.get('https://api.thecatapi.com/v1/images/search', { params: { limit:1, size:"full" } } ); // Ask for 1 Image, at full resolution
 
-          this.image = response.data[0]; // the response is an Array, so just use the first item as the Image
-
-          console.log("-- Image from TheCatAPI.com");
-          console.log("id:", this.image.id);
-          console.log("url:", this.image.url);
-
+          this.catImage = response.data[0].url; // the response is an Array, so just use the first item as the Image
         }
         catch(err) {
           console.log(err);
         }
+      },
+
+      hiddingCat() {
+        this.catImage = stopImage;
       }
+
     },
     computed: {
 
@@ -50,6 +51,18 @@
 
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="css">
+  section.rest-place{
+    border: grey 1px solid;
+    background-color: silver;
+    height: 400px;
+    margin-left: 30%;
+    margin-right: 30%;
+  }
 
+  section.rest-place>img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 </style>

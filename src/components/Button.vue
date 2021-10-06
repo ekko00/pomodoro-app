@@ -1,10 +1,10 @@
-<template>
-  <div>
+<template lang="html">
+  <section class="button">
     <button @click="buttonClickAction" type="button" :value="buttonValue.id" :disabled='buttonValue.isDisable'  ><div v-html="buttonValue.icon"></div></button>
-  </div>
+  </section>
 </template>
 
-<script>
+<script lang="js">
 export default {
   props: ["buttonValue"],
   methods: {
@@ -15,7 +15,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="css">
 button {
   height: 50px;
   width: 50px;

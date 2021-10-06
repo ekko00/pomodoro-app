@@ -4,13 +4,13 @@
   </section>
 </template>
 
-<script>
+<script lang="js">
 export default {
   props: ["image"],
 };
 </script>
 
-<style scoped>
+<style scoped lang="css">
 
 img {
   width: 200px;

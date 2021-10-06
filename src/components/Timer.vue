@@ -8,7 +8,7 @@
 </template>
 
 <script lang="js">
-  const WORK_TIME_DEFAULT = 1200;
+  const WORK_TIME_DEFAULT = 5;
   const REST_TIME_DEFAULT = 300;
   const STATE_DEFAULT = "work";
 
@@ -83,6 +83,7 @@
           this.time = WORK_TIME_DEFAULT;
           this.state = "work";
         }
+        this.showTime();
         this.$emit("swapState", this.state);
       }
     },
@@ -94,6 +95,6 @@
 
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="css">
 
 </style>

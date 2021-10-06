@@ -1,6 +1,6 @@
-<template>
+<template lang="html">
   <h2>{{ title }}</h2>
-  <myImage :image="image"></myImage>
+  <myImage :image="tomatoImage"></myImage>
 
   <div class="buttonDiv">
     <buttonTimer v-on:onClick="Play" :buttonValue="listButtons[0]"></buttonTimer>
@@ -8,12 +8,12 @@
     <buttonTimer v-on:onClick="Stop" :buttonValue="listButtons[2]"></buttonTimer>
   </div>
   
-  <timer ref="timerRef" v-on:swapState="changeTitle"></timer>
+  <timer ref="timerRef" @swapState="UpdateView"></timer>
   
-  <restPlace></restPlace>
+  <restPlace ref="restPlaceRef"></restPlace>
 </template>
 
-<script>
+<script lang="js">
 import buttonTimer from "./components/Button.vue";
 import myImage from "./components/Image.vue";
 import timer from "./components/Timer.vue";
@@ -31,7 +31,7 @@ export default {
     return {
       title: "Pomodoro : Luka & Thibaud",
       state: "WORK !",
-      image: require("./assets/tomate2.jpg"),
+      tomatoImage: require("./assets/tomate2.jpg"),
       listButtons: [
         {
           id: "buttonPlay",
@@ -70,14 +70,19 @@ export default {
       this.listButtons[2].isDisable = true;
       this.$refs.timerRef.stopTimer();
     },
-    UpdateView(stateNew){
-      this.state = stateNew;
+    UpdateView(state){
+      if (state == "work") {
+        this.$refs.restPlace.hiddingCat();
+      }
+      else {
+        this.$refs.restPlace.loadRandomCat();
+      }
     }
   },
 };
 </script>
 
-<style>
+<style lang="css">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
