@@ -9,8 +9,7 @@
   </div>
 
   <p>{{ state }}</p>
-  <timer></timer>
-  <p>{{ timer }}</p>
+  <timer ref="timerRef"></timer>
 </template>
 
 <script>
@@ -29,7 +28,6 @@ export default {
     return {
       title: "Pomodoro : Ben & Jerry",
       state: "WORK !",
-      timer: "0.0",
       image: require("./assets/tomate2.jpg"),
       listButtons: [
         {
@@ -55,16 +53,19 @@ export default {
       this.listButtons[0].isDisable = true;
       this.listButtons[1].isDisable = false;
       this.listButtons[2].isDisable = false;
+      this.$refs.timerRef.playTimer();
     },
     Pause() {
       this.listButtons[0].isDisable = false;
       this.listButtons[1].isDisable = true;
       this.listButtons[2].isDisable = false;
+      this.$refs.timerRef.pauseTimer();
     },
     Stop() {
       this.listButtons[0].isDisable = false;
       this.listButtons[1].isDisable = true;
       this.listButtons[2].isDisable = true;
+      this.$refs.timerRef.stopTimer();
     },
     SwitchState(state) {
       if (state == "WORK !") {

@@ -1,7 +1,7 @@
 <template lang="html">
 
   <section class="timer">
-    <h1>timer Component</h1>
+    <h1>{{ minutes.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false }) }}:{{ seconds.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false }) }}</h1>
   </section>
 
 </template>
@@ -15,67 +15,72 @@
     name: 'timer',
     props: [],
     mounted () {
-      state = STATE_DEFAULT;
-      if (state = "work") {
-        time = WORK_TIME_DEFAULT;
+      this.state = STATE_DEFAULT;
+      if (this.state == "work") {
+        this.time = WORK_TIME_DEFAULT;
       }
       else {
-        time = REST_TIME_DEFAULT;
+        this.time = REST_TIME_DEFAULT;
+
       }
+      this.showTime();
     },
     data () {
       return {
-        clock: Number;
-        time: Number;
-        state: String;
+        clock: Number,
+        time: Number,
+        state: String,
+        minutes: Number,
+        seconds: Number
       }
     },
     methods: {
       clockProcess() {
         // If the count down is over, write some text 
-        if (time <= 0) {
-          swapState();
+        if (this.time <= 0) {
+          this.swapState();
         }
         else {
-          decrementTime();
+          this.decrementTime();
         }
       
         // Show time
-        showTime();
-      }
+        this.showTime();
+      },
 
       playTimer() {
-        clock = setInterval(clockProcess, 1000);
-      }
+        this.clock = setInterval(this.clockProcess, 1000);
+      },
 
       pauseTimer() {
-        clearInterval(clock);
-      }
+        clearInterval(this.clock);
+      },
 
       stopTimer() {
-        clearInterval(clock);
-        time = workTime;
-        state = "work";
-      }
+        clearInterval(this.clock);
+        this.time = WORK_TIME_DEFAULT;
+        this.state = "work";
+        this.showTime();
+      },
       
       showTime() {
         // Time calculations for minutes and seconds
-        var minutes = Math.floor((time % (60 * 60)) / 60);
-        var seconds = Math.floor((time % (60)));
-      }
+        this.minutes = Math.floor((this.time % (60 * 60)) / 60);
+        this.seconds = Math.floor((this.time % (60)));
+      },
 
       decrementTime() {
-        time--;
-      }
+        this.time--;
+      },
 
       swapState() {
-        if (state == "work") {
-          time = restTime;
-          state == "rest";
+        if (this.state == "work") {
+          this.time = REST_TIME_DEFAULT;
+          this.state == "rest";          
         }
         else {
-          time = workTime;
-          state = "work";
+          this.time = WORK_TIME_DEFAULT;
+          this.state = "work";
         }
       }
 
