@@ -14,86 +14,96 @@
 </template>
 
 <script lang="js">
-import ActionButtons from "./components/Button.vue";
-import Work from "./components/Work.vue";
-import Timer from "./components/Timer.vue";
-import Rest from "./components/Rest.vue";
+  import ActionButtons from "./components/Button.vue";
+  import Work from "./components/Work.vue";
+  import Timer from "./components/Timer.vue";
+  import Rest from "./components/Rest.vue";
 
-export default {
-  name: "App",
-  components: {
-    ActionButtons,
-    Work,
-    Timer,
-    Rest
-  },
-  data() {
-    return {
-      title: "Pomodoro : Luka & Thibaud",
-      listButtons: [
-        {
-          id: "buttonPlay",
-          icon: '<i class="fas fa-play"></i>',
-          isDisable: false,
-        },
-        {
-          id: "buttonPause",
-          icon: '<i class="fas fa-pause"></i>',
-          isDisable: true,
-        },
-        {
-          id: "buttonStop",
-          icon: '<i class="fas fa-stop"></i>',
-          isDisable: true,
-        },
-      ],
-    };
-  },
-  methods: {
-    Play() {
-      this.listButtons[0].isDisable = true;
-      this.listButtons[1].isDisable = false;
-      this.listButtons[2].isDisable = false;
-      this.$refs.timerRef.playTimer();
+  export default {
+    name: "App",
+    components: {
+      ActionButtons,
+      Work,
+      Timer,
+      Rest
     },
-    Pause() {
-      this.listButtons[0].isDisable = false;
-      this.listButtons[1].isDisable = true;
-      this.listButtons[2].isDisable = false;
-      this.$refs.timerRef.pauseTimer();
-      this.$refs.restRef.showStop();
+    props: [],
+    mounted () {
+
     },
-    Stop() {
-      this.listButtons[0].isDisable = false;
-      this.listButtons[1].isDisable = true;
-      this.listButtons[2].isDisable = true;
-      this.$refs.timerRef.stopTimer();
-      this.$refs.restRef.showStop();
+    data () {
+      return {
+        title: "Pomodoro : Luka & Thibaud",
+        listButtons: [
+          {
+            id: "buttonPlay",
+            icon: '<i class="fas fa-play"></i>',
+            isDisable: false,
+          },
+          {
+            id: "buttonPause",
+            icon: '<i class="fas fa-pause"></i>',
+            isDisable: true,
+          },
+          {
+            id: "buttonStop",
+            icon: '<i class="fas fa-stop"></i>',
+            isDisable: true,
+          },
+        ],
+      };
     },
-    UpdateView(state){
-      if (state == "work") {
+    created (){
+
+    },
+    methods: {
+      Play() {
+        this.listButtons[0].isDisable = true;
+        this.listButtons[1].isDisable = false;
+        this.listButtons[2].isDisable = false;
+        this.$refs.timerRef.playTimer();
+      },
+      Pause() {
+        this.listButtons[0].isDisable = false;
+        this.listButtons[1].isDisable = true;
+        this.listButtons[2].isDisable = false;
+        this.$refs.timerRef.pauseTimer();
         this.$refs.restRef.showStop();
-      }
-      else {
-        this.$refs.restRef.showCat();
+      },
+      Stop() {
+        this.listButtons[0].isDisable = false;
+        this.listButtons[1].isDisable = true;
+        this.listButtons[2].isDisable = true;
+        this.$refs.timerRef.stopTimer();
+        this.$refs.restRef.showStop();
+      },
+      UpdateView() {
+        if (this.state == "work") {
+          this.$refs.restRef.showStop();
+        }
+        else {
+          this.$refs.restRef.showCat();
+        }
       }
     },
-  },
-};
+    computed: {
+
+    }
+  };
 </script>
 
 <style lang="css">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+  }
 
-.buttonDiv {
-  display: flex;
-  justify-content: center;
-}
+  .buttonDiv {
+    display: flex;
+    justify-content: center;
+  }
 </style>

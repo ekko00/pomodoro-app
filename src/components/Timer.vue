@@ -8,8 +8,8 @@
 </template>
 
 <script lang="js">
-  const WORK_TIME_DEFAULT = 5; // 1200 = 20 minutes
-  const REST_TIME_DEFAULT = 30; // 300 = 5 minutes
+  const WORK_TIME_DEFAULT = 1200; // 1200 = 20 minutes
+  const REST_TIME_DEFAULT = 300; // 300 = 5 minutes
   const CAT_RESET_TIME_DEFAULT = 5;
   const STATE_DEFAULT = "work";
 

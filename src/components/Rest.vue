@@ -30,7 +30,6 @@
       async showCat() {
         this.restImage = loadingImage;
         try{
-          console.log("Call new cat");
           // Create header for ajax get call
           axios.defaults.headers.common['x-api-key'] = "d1d82d47-9b7b-47e1-88a2-d5356ef04279";
 
