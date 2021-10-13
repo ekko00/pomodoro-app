@@ -8,8 +8,8 @@
 </template>
 
 <script lang="js">
-  const WORK_TIME_DEFAULT = 5;
-  const REST_TIME_DEFAULT = 300;
+  const WORK_TIME_DEFAULT = 1200; // 1200 = 20 minutes
+  const REST_TIME_DEFAULT = 300; // 300 = 5 minutes
   const STATE_DEFAULT = "work";
 
   export default  {

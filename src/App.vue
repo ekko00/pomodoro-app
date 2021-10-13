@@ -1,37 +1,35 @@
 <template lang="html">
   <h2>{{ title }}</h2>
-  <myImage :image="tomatoImage"></myImage>
+  <work ref="workRef"></work>
 
   <div class="buttonDiv">
-    <buttonTimer v-on:onClick="Play" :buttonValue="listButtons[0]"></buttonTimer>
-    <buttonTimer v-on:onClick="Pause" :buttonValue="listButtons[1]"></buttonTimer>
-    <buttonTimer v-on:onClick="Stop" :buttonValue="listButtons[2]"></buttonTimer>
+    <actionButtons v-on:onClick="Play" :buttonValue="listButtons[0]"></actionButtons>
+    <actionButtons v-on:onClick="Pause" :buttonValue="listButtons[1]"></actionButtons>
+    <actionButtons v-on:onClick="Stop" :buttonValue="listButtons[2]"></actionButtons>
   </div>
   
   <timer ref="timerRef" @swapState="UpdateView"></timer>
   
-  <restPlace ref="restPlaceRef"></restPlace>
+  <rest ref="restRef"></rest>
 </template>
 
 <script lang="js">
-import buttonTimer from "./components/Button.vue";
-import myImage from "./components/Image.vue";
-import timer from "./components/Timer.vue";
-import restPlace from "./components/RestPlace.vue";
+import ActionButtons from "./components/Button.vue";
+import Work from "./components/Work.vue";
+import Timer from "./components/Timer.vue";
+import Rest from "./components/Rest.vue";
 
 export default {
   name: "App",
   components: {
-    buttonTimer,
-    myImage,
-    timer,
-    restPlace
+    ActionButtons,
+    Work,
+    Timer,
+    Rest
   },
   data() {
     return {
       title: "Pomodoro : Luka & Thibaud",
-      state: "WORK !",
-      tomatoImage: require("./assets/tomate2.jpg"),
       listButtons: [
         {
           id: "buttonPlay",
@@ -69,13 +67,14 @@ export default {
       this.listButtons[1].isDisable = true;
       this.listButtons[2].isDisable = true;
       this.$refs.timerRef.stopTimer();
+      this.$refs.restRef.showStop();
     },
     UpdateView(state){
       if (state == "work") {
-        this.$refs.restPlace.hiddingCat();
+        this.$refs.restRef.showStop();
       }
       else {
-        this.$refs.restPlace.loadRandomCat();
+        this.$refs.restRef.showCat();
       }
     }
   },
