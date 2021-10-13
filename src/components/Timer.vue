@@ -8,8 +8,9 @@
 </template>
 
 <script lang="js">
-  const WORK_TIME_DEFAULT = 1200; // 1200 = 20 minutes
-  const REST_TIME_DEFAULT = 300; // 300 = 5 minutes
+  const WORK_TIME_DEFAULT = 5; // 1200 = 20 minutes
+  const REST_TIME_DEFAULT = 30; // 300 = 5 minutes
+  const CAT_RESET_TIME_DEFAULT = 5;
   const STATE_DEFAULT = "work";
 
   export default  {
@@ -37,12 +38,16 @@
     },
     methods: {
       clockProcess() {
-        // If the count down is over, write some text 
+        // If the count down is over, swap state
         if (this.time <= 0) {
           this.swapState();
         }
         else {
           this.decrementTime();
+
+          if (this.state == "rest") {
+            this.showAnotherCat();
+          }
         }
       
         // Show time
@@ -85,6 +90,12 @@
         }
         this.showTime();
         this.$emit("swapState", this.state);
+      },
+
+      showAnotherCat() {
+        if (this.state == "rest" && this.time % CAT_RESET_TIME_DEFAULT == 0) {
+          this.$emit("showAnotherCat");
+        }
       }
     },
     computed: {

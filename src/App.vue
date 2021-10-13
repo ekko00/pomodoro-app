@@ -8,7 +8,7 @@
     <actionButtons v-on:onClick="Stop" :buttonValue="listButtons[2]"></actionButtons>
   </div>
   
-  <timer ref="timerRef" @swapState="UpdateView"></timer>
+  <timer ref="timerRef" @swapState="UpdateView" @showAnotherCat="UpdateView"></timer>
   
   <rest ref="restRef"></rest>
 </template>
@@ -61,6 +61,7 @@ export default {
       this.listButtons[1].isDisable = true;
       this.listButtons[2].isDisable = false;
       this.$refs.timerRef.pauseTimer();
+      this.$refs.restRef.showStop();
     },
     Stop() {
       this.listButtons[0].isDisable = false;
@@ -76,7 +77,7 @@ export default {
       else {
         this.$refs.restRef.showCat();
       }
-    }
+    },
   },
 };
 </script>

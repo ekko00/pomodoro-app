@@ -1,7 +1,7 @@
 <template lang="html">
 
   <section class="rest">
-    <img :src="restImage">
+    <img :src="this.restImage">
   </section>
 
 </template>
@@ -19,6 +19,7 @@
     },
     data () {
       return {
+        // variable associated with src attribut from img html tag (in template)
         restImage: String
       }
     },
@@ -29,11 +30,15 @@
       async showCat() {
         this.restImage = loadingImage;
         try{
+          console.log("Call new cat");
+          // Create header for ajax get call
           axios.defaults.headers.common['x-api-key'] = "d1d82d47-9b7b-47e1-88a2-d5356ef04279";
 
-          let response = await axios.get('https://api.thecatapi.com/v1/images/search', { params: { limit:1, size:"full" } } ); // Ask for 1 Image, at full resolution
+          // Wait for the request response
+          let response = await axios.get('https://api.thecatapi.com/v1/images/search', { params: { limit:1, size:"full" } } );
 
-          this.restImage = response.data[0].url; // the response is an Array, so just use the first item as the Image
+          // Save image url in restImage
+          this.restImage = response.data[0].url;
         }
         catch(err) {
           console.log(err);
@@ -41,6 +46,7 @@
       },
 
       showStop() {
+        // Save stop image url in restImage
         this.restImage = stopImage;
       }
 
