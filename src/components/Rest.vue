@@ -8,7 +8,7 @@
 
 <script lang="js">
   import axios from 'axios'
-  import stopImage from "../assets/stop.png"
+  import stopImage from "../assets/stop.jpg"
   import loadingImage from "../assets/loading.gif"
 
   export default  {
@@ -60,8 +60,7 @@
 
 <style scoped lang="css">
   section.rest{
-    border: grey 1px solid;
-    background-color: silver;
+    background-color: white;
     height: 400px;
     margin-left: 30%;
     margin-right: 30%;

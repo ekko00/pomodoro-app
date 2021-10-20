@@ -7,7 +7,7 @@
 </template>
 
 <script lang="js">
-  import pomodoroImage from "../assets/tomate.jpg"
+  import pomodoroImage from "../assets/tomate.png"
 
   export default {
     name: 'work',
@@ -39,6 +39,8 @@
 
 img {
   width: 200px;
+  margin-top: 10px;
+  margin-bottom: 30px;
 }
 
 </style>

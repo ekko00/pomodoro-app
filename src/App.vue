@@ -3,9 +3,9 @@
   <work ref="workRef"></work>
 
   <div class="buttonDiv">
-    <actionButtons v-on:onClick="Play" :buttonValue="listButtons[0]"></actionButtons>
-    <actionButtons v-on:onClick="Pause" :buttonValue="listButtons[1]"></actionButtons>
-    <actionButtons v-on:onClick="Stop" :buttonValue="listButtons[2]"></actionButtons>
+    <actionButton v-on:onClick="Play" :buttonValue="listButtons[0]"></actionButton>
+    <actionButton v-on:onClick="Pause" :buttonValue="listButtons[1]"></actionButton>
+    <actionButton v-on:onClick="Stop" :buttonValue="listButtons[2]"></actionButton>
   </div>
   
   <timer ref="timerRef" @swapState="UpdateView" @showAnotherCat="UpdateView"></timer>
@@ -14,7 +14,7 @@
 </template>
 
 <script lang="js">
-  import ActionButtons from "./components/Button.vue";
+  import ActionButton from "./components/Button.vue";
   import Work from "./components/Work.vue";
   import Timer from "./components/Timer.vue";
   import Rest from "./components/Rest.vue";
@@ -22,7 +22,7 @@
   export default {
     name: "App",
     components: {
-      ActionButtons,
+      ActionButton,
       Work,
       Timer,
       Rest
@@ -33,8 +33,13 @@
     },
     data () {
       return {
-        title: "Pomodoro : Luka & Thibaud",
-        listButtons: [
+        title: String,
+        listButtons: Array
+      };
+    },
+    created (){
+      this.title = "Pomodoro : Luka & Thibaud";
+      this.listButtons = [
           {
             id: "buttonPlay",
             icon: '<i class="fas fa-play"></i>',
@@ -50,11 +55,7 @@
             icon: '<i class="fas fa-stop"></i>',
             isDisable: true,
           },
-        ],
-      };
-    },
-    created (){
-
+        ];
     },
     methods: {
       Play() {
@@ -68,7 +69,6 @@
         this.listButtons[1].isDisable = true;
         this.listButtons[2].isDisable = false;
         this.$refs.timerRef.pauseTimer();
-        this.$refs.restRef.showStop();
       },
       Stop() {
         this.listButtons[0].isDisable = false;
@@ -77,11 +77,13 @@
         this.$refs.timerRef.stopTimer();
         this.$refs.restRef.showStop();
       },
-      UpdateView() {
-        if (this.state == "work") {
+      UpdateView(state) {
+        if (state == "work") {
+          console.log("stop")
           this.$refs.restRef.showStop();
         }
         else {
+          console.log("cat")
           this.$refs.restRef.showCat();
         }
       }
